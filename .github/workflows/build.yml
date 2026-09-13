@@ -1,0 +1,34 @@
+name: Build WormixTweak
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  build:
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Theos
+        run: |
+          git clone --recursive https://github.com/theos/theos.git $THEOS
+        env:
+          THEOS: ${{ github.workspace }}/theos
+
+      - name: Install dependencies
+        run: |
+          brew install ldid dpkg
+
+      - name: Build tweak
+        run: |
+          export THEOS="$GITHUB_WORKSPACE/theos"
+          make package FINALPACKAGE=1
+
+      - name: Upload DEB
+        uses: actions/upload-artifact@v4
+        with:
+          name: WormixTweak-deb
+          path: packages/*.deb
