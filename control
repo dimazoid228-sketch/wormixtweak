@@ -1,0 +1,9 @@
+Package: com.wormixtweak.diagnostic
+Name: WormixTweak Diagnostic
+Version: 0.1
+Architecture: iphoneos-arm64
+Description: Wormix diagnostic runtime tweak
+Maintainer: Dmitry
+Author: Dmitry
+Section: Tweaks
+Depends: mobilesubstrate
